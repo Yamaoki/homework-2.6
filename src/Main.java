@@ -4,12 +4,13 @@ public class Main {
     private static final Random RANDOM = new Random();
     public static void main(String[] args) {
         List<Integer> nums = new ArrayList<>(List.of(1, 1, 2, 3, 4, 4, 5, 5, 6, 7));
-        List<String> words = generate(12);
         task1(nums);
         System.out.println("===================");
         task2(nums);
         System.out.println("===================");
-        task3(words);
+        task3(List.of("world", "world", "World", "WORLD", "world"));
+        System.out.println("===================");
+        task4(List.of("world", "world", "World", "WORLD", "world"));
     }
     private static void task1(List<Integer> nums) {
         for (Integer number : nums) {
@@ -33,17 +34,15 @@ public class Main {
             }
         }
     }
-    private static List<String> generate(int n) {
-        List<String> list = new ArrayList<>(n);
-        int length = 8;
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < length; j++) {
-                stringBuilder.append((char)RANDOM.nextInt('а', 'я'));
-            }
-            list.add(stringBuilder.toString());
-            stringBuilder.delete(0, stringBuilder.length());
+    private static void task4(List<String> words) {
+        Map<String, Integer> map = new TreeMap<>();
+        for (String word : words) {
+           if (!map.containsKey(word)) {
+               map.put(word, 1);
+           } else  {
+               map.replace(word, map.get(word) + 1);
+           }
         }
-        return list;
+        System.out.println(map);
     }
 }
